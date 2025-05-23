@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: bybit-signal-scanner
+    runtime: python
+    region: singapore  # الأفضل للأداء في المنطقة
+    branch: main
+    buildCommand: |
+      pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: FLASK_APP
+        value: app.py
+      - key: FLASK_ENV
+        value: production
+      - key: FLASK_SECRET_KEY
+        generateValue: true  # سيولد Render مفتاحًا آمنًا تلقائيًا
+    plan: free  # الخطة المجانية
