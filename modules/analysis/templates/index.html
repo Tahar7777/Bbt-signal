@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bybit Signal Scanner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Bybit Signal Scanner</h1>
+            <p class="update-time">آخر تحديث: {{ last_update or "لم يتم التحديث بعد" }}</p>
+        </header>
+        
+        <div class="signals-container">
+            {% if signals %}
+                {% for signal in signals %}
+                <div class="signal-card {{ 'buy' if 'BUY' in signal.signal else 'sell' }}">
+                    <div class="signal-header">
+                        <h2>{{ signal.signal }}</h2>
+                        <span class="confidence {{ 'high' if signal.confidence > 70 else 'medium' if signal.confidence > 50 else 'low' }}">
+                            الثقة: {{ "%.0f"|format(signal.confidence) }}%
+                        </span>
+                    </div>
+                    
+                    <div class="signal-details">
+                        <p><strong>الزوج:</strong> {{ signal.symbol }}</p>
+                        <p><strong>السعر الحالي:</strong> {{ "%.2f"|format(signal.price) }} USDT</p>
+                        <p><strong>الهدف:</strong> {{ "%.2f"|format(signal.target) }} USDT ({{ "%.1f"|format(signal.target_percentage * 100) }}%)</p>
+                        <p><strong>وقف الخسارة:</strong> {{ "%.2f"|format(signal.stop_loss) }} USDT</p>
+                        <p><strong>نوع الصفقة:</strong> {{ 'شراء (LONG)' if 'BUY' in signal.signal else 'بيع (SHORT)' }}</p>
+                        <p><strong>الرافعة المقترحة:</strong> x{{ signal.leverage }}</p>
+                        <p><strong>الوقت:</strong> {{ signal.timestamp }}</p>
+                    </div>
+                    
+                    <div class="indicators">
+                        <h3>المؤشرات الفنية:</h3>
+                        <ul>
+                            {% for indicator, status in signal.indicators.items() %}
+                            <li><strong>{{ indicator|upper }}:</strong> <span class="indicator-{{ status|lower }}">{{ status }}</span></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-signals">
+                    <p>لا توجد إشارات قوية حالياً. يرجى الانتظار للتحديث التالي.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <script>
+        // تحديث الصفحة كل 5 دقائق
+        setTimeout(function(){
+            window.location.reload();
+        }, 300000);
+    </script>
+</body>
+</html>
