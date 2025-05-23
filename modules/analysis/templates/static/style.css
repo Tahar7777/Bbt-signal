@@ -1,0 +1,140 @@
+body {
+    font-family: 'Tajawal', sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.update-time {
+    color: #7f8c8d;
+    font-size: 0.9em;
+}
+
+.signals-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+.signal-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.signal-card:hover {
+    transform: translateY(-5px);
+}
+
+.signal-card.buy {
+    border-top: 4px solid #2ecc71;
+}
+
+.signal-card.sell {
+    border-top: 4px solid #e74c3c;
+}
+
+.signal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.signal-header h2 {
+    margin: 0;
+    color: #2c3e50;
+}
+
+.confidence {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+.confidence.high {
+    background-color: rgba(46, 204, 113, 0.2);
+    color: #27ae60;
+}
+
+.confidence.medium {
+    background-color: rgba(241, 196, 15, 0.2);
+    color: #f39c12;
+}
+
+.confidence.low {
+    background-color: rgba(231, 76, 60, 0.2);
+    color: #c0392b;
+}
+
+.signal-details p {
+    margin: 8px 0;
+}
+
+.indicators {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.indicators h3 {
+    margin-top: 0;
+    color: #2c3e50;
+}
+
+.indicators ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.indicators li {
+    margin-bottom: 5px;
+}
+
+.indicator-bullish, .indicator-oversold {
+    color: #27ae60;
+}
+
+.indicator-bearish, .indicator-overbought {
+    color: #e74c3c;
+}
+
+.indicator-neutral {
+    color: #3498db;
+}
+
+.no-signals {
+    text-align: center;
+    padding: 40px;
+    background: white;
+    border-radius: 10px;
+    grid-column: 1 / -1;
+}
+
+.no-signals p {
+    color: #7f8c8d;
+    font-size: 1.1em;
+}
